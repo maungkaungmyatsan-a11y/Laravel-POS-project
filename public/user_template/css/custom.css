@@ -1,0 +1,73 @@
+/*rating */
+.rating-css div {
+    color:green;
+    font-size: 30px;
+    font-family: sans-serif;
+    font-style: 800;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 20px 0;
+}
+.rating-css input {
+    display: none;
+}
+.rating-css input + label {
+    font-size: 60px;
+    text-shadow: 1px 1px 0 #8f8420;
+    cursor:pointer;
+}
+.rating-css input:checked + label ~ label {
+    color: #b4afaf;
+}
+.rating-css label:active {
+    transform:scale(0.8);
+    transition:0.3s ease;
+}
+/*end of star rating*/
+.checked {
+    color: green;
+}
+s
+/* Carousel Styles */
+.owl-carousel .owl-dots {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.owl-carousel .owl-dots button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd !important;
+    transition: all 0.3s ease;
+}
+
+.owl-carousel .owl-dots button.active {
+    background: #FEA116 !important;
+    transform: scale(1.2);
+}
+
+/* Product Card Styles */
+.vesitable-item {
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+.vesitable-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.vesitable-img {
+    overflow: hidden;
+}
+
+.vesitable-img img {
+    transition: transform 0.3s ease;
+}
+
+.vesitable-item:hover .vesitable-img img {
+    transform: scale(1.05);
+}
