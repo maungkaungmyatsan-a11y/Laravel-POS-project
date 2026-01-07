@@ -11,4 +11,4 @@
 - Responsive UI 
 - Secure & Role-based Access
 
-- This POS web application is built using Laravel (PHP) with Bootstrap 5 for responsive UI, jQuery and JavaScript for interactivity, and MySQL for data management.
+- This POS project is built using Laravel (PHP) with Bootstrap 5 for responsive UI, jQuery and JavaScript for interactivity, and MySQL for data management.
