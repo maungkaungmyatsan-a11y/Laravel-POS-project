@@ -35,7 +35,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="mx-3 sidebar-brand-text">Code Lab Studio</div>
+                <div class="mx-3 sidebar-brand-text">Digital Hub</div>
             </a>
 
             <!-- Divider -->
@@ -65,7 +65,7 @@
 
             @if(auth()->user()->role == 'superadmin')
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa-solid fa-credit-card"></i><span>Payment Method </span></a>
+                    <a class="nav-link" href="{{ route('admin#paymentMethodsPage') }}"><i class="fa-solid fa-credit-card"></i><span>Payment Method </span></a>
                 </li>
             @endif
 

@@ -17,7 +17,9 @@
         rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
@@ -48,7 +50,7 @@
         <div class="container px-0">
             <nav class="navbar navbar-light bg-white navbar-expand-xl">
                 <a href="{{route('user#home')}}" class="navbar-brand">
-                    <h1 class="text-primary display-6">Welcome From POS Store <i
+                    <h1 style="color: #1F2937" class="display-6">Welcome From Digital Hub <i
                             class="fa-regular fa-face-grin-beam text-success"></i></h1>
                 </a>
                 <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
@@ -60,15 +62,15 @@
                         <a href="{{ route('user#home') }}" class="nav-item nav-link ">Shop</a>
                         <a href="{{ route('user#cart') }}" class="nav-item nav-link">Cart</a>
                         <a href="{{ route('user#orderList') }}" class="nav-item nav-link">My Order</a>
-                        <a href="#" class="nav-item nav-link">Contact</a>
+                        <a href="{{ route('user#contactPage') }}" class="nav-item nav-link">Contact</a>
 
                     </div>
                     <div class="d-flex m-3 me-0">
 
-                        <a href="" class="position-relative me-4 my-auto">
+                        <a href="{{ route('user#cart') }}" class="position-relative me-4 my-auto">
                             <i class="fa fa-shopping-bag fa-2x"></i>
                         </a>
-                        <a href="" class="position-relative me-4 my-auto">
+                        <a href="{{ route('user#orderList') }}" class="position-relative me-4 my-auto">
                             <i class="fa-solid fa-list-check fa-2x"></i>
                         </a>
                         <div class="nav-item dropdown">
@@ -78,8 +80,9 @@
                                 <span>{{ auth()->user()->name }}</span>
                             </a>
                             <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                <a href="#" class="dropdown-item my-2">Edit Profile</a>
-                                <a href="#" class="dropdown-item my-2">Change Password</a>
+                                <a href="{{ route('user#profileDetails') }}" class="dropdown-item my-2">Profile</a>
+                                <a href="{{route('user#changePasswordPage')}}" class="dropdown-item my-2">Change
+                                    Password</a>
                                 <a href="#" class="dropdown-item my-2">
                                     <form action="{{ route('logout') }}" method="post">
                                         @csrf
@@ -112,8 +115,8 @@
                 <div class="row g-4">
                     <div class="col-lg-3">
                         <a href="#">
-                            <h1 class="text-primary mb-0">Fruitables</h1>
-                            <p class="text-secondary mb-0">Fresh products</p>
+                            <h1 class="text-primary mb-0">Digital Hub</h1>
+                            <p class="text-secondary mb-0">Latest products</p>
                         </a>
                     </div>
                     <div class="col-lg-6">
@@ -143,8 +146,9 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-item">
                         <h4 class="text-light mb-3">Why People Like us!</h4>
-                        <p class="mb-4">typesetting, remaining essentially unchanged. It was
-                            popularised in the 1960s with the like Aldus PageMaker including of Lorem Ipsum.</p>
+                        <p class="mb-4">Our POS system is built to make selling easy.
+                            From fast checkout to accurate reports, we help businesses run smoothly every day.
+                            Simple, secure, and reliable for all types of stores.</p>
                         <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a>
                     </div>
                 </div>
@@ -152,7 +156,7 @@
                     <div class="d-flex flex-column text-start footer-item">
                         <h4 class="text-light mb-3">Shop Info</h4>
                         <a class="btn-link" href="">About Us</a>
-                        <a class="btn-link" href="">Contact Us</a>
+                        <a class="btn-link" href="{{ route('user#contactPage') }}">Contact Us</a>
                         <a class="btn-link" href="">Privacy Policy</a>
                         <a class="btn-link" href="">Terms & Condition</a>
                         <a class="btn-link" href="">Return Policy</a>
@@ -162,20 +166,20 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="d-flex flex-column text-start footer-item">
                         <h4 class="text-light mb-3">Account</h4>
-                        <a class="btn-link" href="">My Account</a>
+                        <a class="btn-link" href="{{ route('user#profileDetails') }}">My Account</a>
                         <a class="btn-link" href="">Shop details</a>
-                        <a class="btn-link" href="">Shopping Cart</a>
+                        <a class="btn-link" href="{{ route('user#cart') }}">Shopping Cart</a>
                         <a class="btn-link" href="">Wishlist</a>
-                        <a class="btn-link" href="">Order History</a>
-                        <a class="btn-link" href="">International Orders</a>
+                        <a class="btn-link" href="{{ route('user#orderList') }}">Order History</a>
+
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-item">
                         <h4 class="text-light mb-3">Contact</h4>
-                        <p>Address: 1429 Netus Rd, NY 48247</p>
+                        <p>Address: No.17,Innwa Road,Kyauk Myung,Tamwe,Yangon</p>
                         <p>Email: Example@gmail.com</p>
-                        <p>Phone: +0123 4567 8910</p>
+                        <p>Phone: +950000000</p>
                         <p>Payment Accepted</p>
 
                     </div>
@@ -190,8 +194,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site
-                            Name</a>, All right reserved.</span>
+                    <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Digital
+                            Hub</a>, All right reserved.</span>
                 </div>
                 <div class="col-md-6 my-auto text-center text-md-end text-white">
                     <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->

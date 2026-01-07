@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class=" d-flex justify-content-between my-2">
-            <a href="{{ route('profile#accountList', ['accountType' => 'admin']) }}"> <button
+            <a href="{{ route('profile#accountList', ['accountType' => 'user']) }}"> <button
                     class=" btn btn-sm btn-secondary"> User List</button> </a>
             <div class="">
                 <form action="{{ route('profile#accountList', ['accountType' => 'admin']) }}" method="get">

@@ -126,6 +126,8 @@ class AdminProfileController extends Controller
         return back()->with(['success' => 'delete account success']);
     }
 
+
+
     //checkNewAdminValidation
     private function checkAccountValidation($request)
     {

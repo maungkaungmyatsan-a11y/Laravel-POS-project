@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('user.layouts.master')
 
 @section('content')
 
@@ -7,12 +7,12 @@
 
         <!-- Page Heading -->
         <div class="">
-            <div class="row">
+            <div class="row" style="margin-top: 8rem">
                 <div class="col-8 offset-2">
 
                     <div class="card">
                         <div class="shadow card-body">
-                            <form action="{{ route('profile#changePassword') }}" method="post" class="p-3 rounded">
+                            <form action="{{ route('user#changePasswordPage') }}" method="post" class="p-3 rounded">
                                 @csrf
 
                                 <div class="mb-3">

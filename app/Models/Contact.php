@@ -9,6 +9,7 @@ class Contact extends Model
      protected $fillable = [
         'user_id',
         'user_name',
+        'phone',
         'user_email',
         'title',
         'message',

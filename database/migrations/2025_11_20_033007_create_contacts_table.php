@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->text('user_name');
+            $table->string('phone')->nullable();
             $table->text('user_email');
             $table->string('title',100)->nullable();
             $table->longText('message');

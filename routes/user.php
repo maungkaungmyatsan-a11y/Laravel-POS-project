@@ -17,6 +17,13 @@ use App\Http\Controllers\UserController;
         Route::get('/cart/temp',[UserController::class,'cartTemp'])->name('user#cartTemp');
         Route::post('/payment',[UserController::class,'payment'])->name('user#payment');
         Route::get('/order/list',[UserController::class,'orderList'])->name('user#orderList');
+        Route::get('/profile/details',[UserController::class,'profileDetails'])->name('user#profileDetails');
+        Route::get('/profile/edit',[UserController::class,'profileEdit'])->name('user#profileEdit');
+        Route::post('/profile/update/{id}',[UserController::class,'profileUpdate'])->name('user#profileUpdate');
+        Route::get('/profile/change/password',[UserController::class,'changePasswordPage'])->name('user#changePasswordPage');
+        Route::post('/profile/change/password',[UserController::class,'changePassword'])->name('user#changePassword');
+        Route::get('/contact/page',[UserController::class,'contactPage'])->name('user#contactPage');
+        Route::post('/contact',[UserController::class,'contact'])->name('user#contact');
 
 
 

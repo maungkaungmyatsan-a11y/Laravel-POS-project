@@ -57,6 +57,8 @@ class OrderController extends Controller
             ->where('orders.order_code', $orderCode)
             ->get();
 
+
+
         $paymentHistories = PaymentHistory::select('payments.account_type as payments_method', 'payment_histories.created_at', 'payment_histories.phone', 'payment_histories.total_amount', 'payment_histories.address', 'payment_histories.payslip_image')
             ->leftJoin('payments', 'payment_histories.payment_method', 'payments.id')
             ->where('order_code', $orderCode)
