@@ -116,7 +116,7 @@
                     <div class="col-lg-3">
                         <a href="#">
                             <h1 class="text-primary mb-0">Digital Hub</h1>
-                            <p class="text-secondary mb-0">Latest products</p>
+                            <p class="text-secondary mb-0">Latest Tech Products</p>
                         </a>
                     </div>
                     <div class="col-lg-6">
@@ -151,21 +151,14 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="d-flex flex-column text-start footer-item">
                         <h4 class="text-light mb-3">Shop Info</h4>
-                        <a class="btn-link" href="">About Us</a>
                         <a class="btn-link" href="{{ route('user#contactPage') }}">Contact Us</a>
-                        <a class="btn-link" href="">Privacy Policy</a>
-                        <a class="btn-link" href="">Terms & Condition</a>
-                        <a class="btn-link" href="">Return Policy</a>
-                        <a class="btn-link" href="">FAQs & Help</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="d-flex flex-column text-start footer-item">
                         <h4 class="text-light mb-3">Account</h4>
                         <a class="btn-link" href="{{ route('user#profileDetails') }}">My Account</a>
-                        <a class="btn-link" href="">Shop details</a>
                         <a class="btn-link" href="{{ route('user#cart') }}">Shopping Cart</a>
-                        <a class="btn-link" href="">Wishlist</a>
                         <a class="btn-link" href="{{ route('user#orderList') }}">Order History</a>
 
                     </div>
