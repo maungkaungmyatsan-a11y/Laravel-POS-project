@@ -33,8 +33,27 @@
                                     <td>
                                         <p class="mb-0 mt-4">{{ $item->name }}</p>
                                     </td>
-                                    <td>
-                                        <p class="mb-0 mt-4 price">{{ $item->price }} mmk</p>
+
+                                    <td class="mb-0 mt-4 price">
+                                        @if ($item->discount_type === 'percent')
+                                            <p class="text-danger text-decoration-line-through mb-0">
+                                                {{ $item->price }} mmk
+                                            </p>
+                                            <p class="fw-bold mb-0">
+                                                {{ $item->price - ($item->price * $item->discount_value / 100) }} mmk
+                                            </p>
+                                        @elseif ($item->discount_type === 'amount')
+                                            <p class="text-danger text-decoration-line-through mb-0">
+                                                {{ $item->price }} mmk
+                                            </p>
+                                            <p class="fw-bold mb-0">
+                                                {{ $item->price - $item->discount_value }} mmk
+                                            </p>
+                                        @else
+                                            <p class="fw-bold mb-0">
+                                                {{ $item->price }} mmk
+                                            </p>
+                                        @endif
                                     </td>
                                     <td>
                                         <div class="input-group quantity mt-4" style="width: 100px;">
@@ -134,7 +153,8 @@
             $(".btn-plus, .btn-minus").click(function () {
                 parentNode = $(this).parents("tr")
 
-                singlePrice = parentNode.find(".price").text().replace("mmk", "") * 1;
+                singlePrice = parentNode.find(".price p:last").text().replace("mmk", "") * 1;
+
                 qty = parentNode.find(".qty").val();
 
                 parentNode.find(".total").text((singlePrice * qty) + "mmk")

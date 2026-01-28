@@ -4,7 +4,8 @@
         <div class="container py-5">
             <div class="row g-4 mb-5">
                 <div class="col-lg-8 col-xl-9">
-                    <a href="{{ route('user#home') }}"> Home </a> <i class=" mx-1 mb-4 fa-solid fa-greater-than"></i> Details
+                    <a href="{{ route('user#home') }}"> Home </a> <i class=" mx-1 mb-4 fa-solid fa-greater-than"></i>
+                    Details
                     <div class="row g-4">
                         <div class="col-lg-6">
                             <div class="border rounded">
@@ -18,7 +19,23 @@
                             <h4 class="fw-bold"></h4>
                             <span class="text-danger mb-3"> ({{ $product->stock }} items left !) </span>
                             <p class="mb-3">Category: {{ $product->category_name }}</p>
-                            <h5 class="fw-bold mb-3">{{ $product->price }} mmk</h5>
+                            @foreach ($products as $item)
+                                @if($item->discount_value)
+                                    <div>
+                                        <p class="text-danger fs-6 mb-0 text-decoration-line-through">
+                                            {{ $item->price }} mmk
+                                        </p>
+                                        <p class="text-dark fs-5 fw-bold mb-0">
+                                            {{ $item->price - $item->discount_amount }} mmk
+                                        </p>
+                                    </div>
+                                @else
+                                    <p class="text-dark fs-5 fw-bold mb-0">
+                                        {{ $item->price }} mmk
+                                    </p>
+                                @endif
+
+                            @endforeach
                             <div class="d-flex mb-4">
                                 <span class=" ">
                                     {{ $avgRating }} <i class="fa-solid fa-star text-warning"></i>

@@ -25,7 +25,5 @@ use App\Http\Controllers\UserController;
         Route::get('/contact/page',[UserController::class,'contactPage'])->name('user#contactPage');
         Route::post('/contact',[UserController::class,'contact'])->name('user#contact');
 
-
-
 });
 

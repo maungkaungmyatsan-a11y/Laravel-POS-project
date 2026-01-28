@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\PaymentHistory;
 use App\Models\Product;
+use App\Models\ProductDiscount;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -13,10 +14,10 @@ class OrderController extends Controller
     {
 
         $orderList = Order::select('orders.id as order_id', 'orders.count as order_count', 'users.name as user_name', 'orders.order_code', 'orders.status', 'orders.created_at')
-                            ->leftJoin('users', 'orders.user_id', 'users.id')
-                            ->when(request('orderCode'), function ($query) {
-                                $query->where('orders.order_code', 'like', '%' . request('orderCode') . '%');
-                            });
+            ->leftJoin('users', 'orders.user_id', 'users.id')
+            ->when(request('orderCode'), function ($query) {
+                $query->where('orders.order_code', 'like', '%' . request('orderCode') . '%');
+            });
 
         if ($state == 'reject') {
             $orderList = $orderList->where('orders.status', '=', 'reject');
@@ -25,14 +26,14 @@ class OrderController extends Controller
         }
 
         $orderList = $orderList->groupBy('orders.order_code')
-                               ->orderBy('orders.created_at', 'desc')
-                               ->get();
+            ->orderBy('orders.created_at', 'desc')
+            ->get();
 
         foreach ($orderList as $item) {
             $orderData = Order::select('products.name', 'products.price', 'products.image', 'orders.count as order_count', 'products.stock as current_stock', 'orders.order_code', 'orders.created_at', 'orders.total_price')
-                            ->leftJoin('products', 'orders.product_id', 'products.id')
-                            ->where('orders.order_code', $item->order_code)
-                            ->get();
+                ->leftJoin('products', 'orders.product_id', 'products.id')
+                ->where('orders.order_code', $item->order_code)
+                ->get();
 
             $eachOrderStatus = true;
             foreach ($orderData as $eachItem) {
@@ -56,8 +57,6 @@ class OrderController extends Controller
             ->leftJoin('products', 'orders.product_id', 'products.id')
             ->where('orders.order_code', $orderCode)
             ->get();
-
-
 
         $paymentHistories = PaymentHistory::select('payments.account_type as payments_method', 'payment_histories.created_at', 'payment_histories.phone', 'payment_histories.total_amount', 'payment_histories.address', 'payment_histories.payslip_image')
             ->leftJoin('payments', 'payment_histories.payment_method', 'payments.id')
@@ -127,5 +126,53 @@ class OrderController extends Controller
             'status'  => 'success',
             'message' => 'order confirm',
         ]);
+    }
+
+    //discount
+    public function discountCreate(Request $request)
+    {
+
+        $products = Product::all();
+
+        return view('admin.order.discount', compact('products'));
+    }
+
+    public function discountStore(Request $request)
+    {
+
+        $this->discountValidation($request);
+
+        $products = Product::whereIn('id',$request->productIds)
+                            ->get();
+
+        foreach ($products as $product) {
+            if($request->discountType === 'percent'){
+                $discountAmount = ($product->price * $request->discountValue) / 100;
+            }else{
+                $discountAmount = min($request->discountValue,$product->price);
+            }
+
+            ProductDiscount::updateORCreate([
+                'product_id' => $product->id
+            ],
+            [
+                'discount_type' => $request->discountType,
+                'discount_value' => $request->discountValue,
+                'discount_amount' => $discountAmount,
+
+            ]);
+        }
+        return back()->with('success', 'Discount applied to selected products!');
+    }
+
+    private function discountValidation($request)
+    {
+        $request->validate([
+            'productIds'    => 'required|array|min:1',
+            'discountType'  => 'required',
+            'discountValue' => 'required|numeric|min:1',
+
+        ]);
+
     }
 }

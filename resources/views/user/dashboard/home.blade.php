@@ -1,12 +1,12 @@
 @extends('user.layouts.master')
 @section('content')
-    <!-- Fruits Shop Start-->
+    <!--Shop Start-->
     <div class="container-fluid fruite py-5 mt-5">
         <div class="container py-5">
             <div class="tab-class text-center">
                 <div class="row g-4">
                     <div class="col-lg-4 text-start">
-                        <h1 style="color: #1F2937">Our Latest Products</h1>
+                        <h1 style="color: #1F2937">Our Latest Tech Products</h1>
                     </div>
                     <div class="col-lg-8 text-end">
                         <ul class="nav nav-pills d-inline-flex text-center mb-5">
@@ -22,7 +22,6 @@
                                     </a>
                                 </li>
                             @endforeach
-
 
                         </ul>
                     </div>
@@ -93,9 +92,25 @@
                                                     <h4>{{ $item->name }}</h4>
                                                     <p>{{ Str::words($item->description, 10, '...') }}</p>
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">{{ $item->price }} mmk</p>
-                                                        <a href="{{route('user#productDetails',$item->id)}}"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary"> View More</a>
+                                                        @if($item->discount_value)
+                                                            <div>
+                                                                <p class="text-danger fs-6 mb-0 text-decoration-line-through">
+                                                                    {{ $item->price }} mmk
+                                                                </p>
+                                                                <p class="text-dark fs-5 fw-bold mb-0">
+                                                                    {{ $item->price - $item->discount_amount }} mmk
+                                                                </p>
+                                                            </div>
+                                                        @else
+                                                            <p class="text-dark fs-5 fw-bold mb-0">
+                                                                {{ $item->price }} mmk
+                                                            </p>
+                                                        @endif
+
+                                                        <a href="{{ route('user#productDetails',$item->id) }}"
+                                                        class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                            View More
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -119,5 +134,5 @@
             </div>
         </div>
     </div>
-    <!-- Fruits Shop End-->
+    <!-- Shop End-->
 @endsection

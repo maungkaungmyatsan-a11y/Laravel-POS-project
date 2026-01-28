@@ -77,6 +77,10 @@
                 <a class="nav-link" href="{{ route('admin#orderList') }}"><i class="fa-solid fa-cart-shopping"></i><span>Order Board </span></a>
             </li>
 
+             <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin#discountCreate') }}"><i class="fa-solid fa-tags"></i><span>Discount</span></a>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('profile#changePasswordPage') }}"><i
                         class="fa-solid fa-lock"></i><span>Change Password </span></a>
@@ -170,9 +174,7 @@
 
                 <!-- Bootstrap core JavaScript-->
                 <script src="{{ asset('admin_template/vendor/jquery/jquery.min.js') }}"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-                    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-                    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
                 <script src="{{ asset('admin_template/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
                 <!-- Core plugin JavaScript-->

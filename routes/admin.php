@@ -62,6 +62,7 @@ Route::group(['middleware' => ['adminMiddleware','auth'], 'prefix' => 'admin'], 
        Route::get('reject',[OrderController::class,'orderReject'])->name('admin#orderReject');
        Route::get('accept',[OrderController::class,'orderAccept'])->name('admin#orderAccept');
        Route::get('list/accept',[OrderController::class,'orderlistAccept'])->name('admin#orderlistAccept');
+
     });
 
     //Sale
@@ -77,6 +78,13 @@ Route::group(['middleware' => ['adminMiddleware','auth'], 'prefix' => 'admin'], 
         Route::get('delete/{id}', [PaymentController::class, 'deletePayment'])->name('admin#deletePayment');
         Route::get('edit/{id}', [PaymentController::class, 'editPayment'])->name('admin#editPayment');
         Route::post('update/{id}', [PaymentController::class, 'updatePayment'])->name('admin#updatePayment');
+    });
+
+    //Discount
+    Route::group(['prefix' => 'discount'],function(){
+        Route::get('create',[OrderController::class,'discountCreate'])->name('admin#discountCreate');
+        Route::post('store',[OrderController::class,'discountStore'])->name('admin#discountStore');
+
     });
 
 });

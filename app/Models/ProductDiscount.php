@@ -4,18 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class ProductDiscount extends Model
 {
     protected $fillable = [
-        'user_id',
         'product_id',
-        'count',
-        'total_price',
         'discount_type',
         'discount_value',
         'discount_amount',
-        'final_price',
-        'status',
-        'order_code',
+        'is_active',
+        'start_at',
+        'end_at',
+
     ];
+
 }

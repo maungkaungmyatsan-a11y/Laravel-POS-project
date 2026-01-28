@@ -24,8 +24,11 @@ class UserController extends Controller
         if (request('searchKey')) {
 
         }
-        $products = Product::select('products.id', 'products.name', 'products.price', 'products.image', 'products.description', 'categories.name as category_name')
+        $products = Product::select('products.id', 'products.name', 'products.price', 'products.image', 'products.description', 'categories.name as category_name','product_discounts.discount_amount','product_discounts.discount_value')
             ->leftJoin('categories', 'products.category_id', 'categories.id')
+            ->leftJoin('product_discounts','products.id','product_discounts.product_id')
+
+            ->where('products.stock','>',0)
         //when user click category tag
             ->when(request('categoryId'), function ($query) {
                 $categoryId = request('categoryId');
@@ -67,12 +70,21 @@ class UserController extends Controller
 
         $categories = Category::select('id', 'name')->get();
 
+
         return view('user.dashboard.home', compact('products', 'categories'));
     }
 
     //product details
     public function productDetails($id)
     {
+        $products = Product::select('products.id', 'products.name', 'products.price', 'products.image', 'products.description', 'categories.name as category_name','product_discounts.discount_amount','product_discounts.discount_value')
+            ->leftJoin('categories', 'products.category_id', 'categories.id')
+            ->leftJoin('product_discounts','products.id','product_discounts.product_id')
+            ->where('products.id', $id)
+            ->where('products.stock','>',0)
+            ->get();
+
+
         $product = Product::select('products.*', 'categories.name as category_name')
             ->leftJoin('categories', 'products.category_id', 'categories.id')
             ->where('products.id', $id)
@@ -93,7 +105,7 @@ class UserController extends Controller
         // ->leftJoin('categories','products.category_id','categories.id')
         // ->get();
 
-        return view('user.product.details', compact('product', 'comments', 'rating', 'avgRating'));
+        return view('user.product.details', compact('product', 'comments', 'rating', 'avgRating','products'));
 
     }
 
@@ -124,7 +136,7 @@ class UserController extends Controller
             'user_id'    => $request->userId,
             'product_id' => $request->productId],
             [
-                'count' => $request->productRating]
+            'count' => $request->productRating]
         );
 
         return back()->with(['ratingSuccess' => 'success']);
@@ -132,10 +144,13 @@ class UserController extends Controller
 
     public function cart()
     {
-        $orderItems = Cart::select('carts.id', 'carts.user_id', 'carts.product_id', 'carts.quantity', 'products.name', 'products.price', 'products.image')
+        $orderItems = Cart::select('carts.id', 'carts.user_id', 'carts.product_id', 'carts.quantity', 'products.name', 'products.price', 'products.image','product_discounts.discount_value','product_discounts.discount_type')
             ->leftJoin('products', 'carts.product_id', 'products.id')
-            ->where('user_id', auth()->user()->id)
+            ->leftJoin('product_discounts','products.id','product_discounts.product_id')
+            ->where('carts.user_id', auth()->user()->id)
             ->get();
+
+
 
         return view('user.cart.list', compact('orderItems'));
 
